@@ -52,8 +52,7 @@ class Parser:
     def is_empty(self, line):
         return len(line) == 0
     def parseKey(self, line):
-        pos = line.find('=')
-        return [line[0:pos].strip(), line[pos + 1:].strip()]
+        return map(lambda l : l.strip(), line.split('=', 1))
     def addEntry(self, section, key, val):
         self.parseOutput.setProperty(section, key, val)
 
