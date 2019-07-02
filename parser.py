@@ -59,9 +59,6 @@ class Parser:
     def addEntry(self, section, key, val):
         self.parseOutput.setProperty(section, key, val)
 
-def doAssert(expr):
-    if not expr:
-        raise Exception("Error")
 
 sample1 = """
 a = b
@@ -79,19 +76,19 @@ def parseIni(string):
 if __name__ == "__main__":    
     d = parseIni(sample1)
     # doAssert(d.sectionsCount() == 2)
-    doAssert(d.getProperty("general", "appname") == "configparser")
-    doAssert(d.getProperty("general","version") == "0.1")
-    doAssert(d.getProperty("author","name") == "xmonader")
-    doAssert(d.getProperty("author","email") == "notxmonader@gmail.com")
+    assert (d.getProperty("general", "appname") == "configparser")
+    assert (d.getProperty("general","version") == "0.1")
+    assert (d.getProperty("author","name") == "xmonader")
+    assert (d.getProperty("author","email") == "notxmonader@gmail.com")
 
     d.setProperty("author", "email", "alsonotxmonader@gmail.com")
-    doAssert(d.getProperty("author","email") == "alsonotxmonader@gmail.com")
-    doAssert(d.hasSection("general") == True)
-    doAssert(d.hasSection("author") == True)
-    doAssert(d.hasProperty("author", "name") == True)
+    assert (d.getProperty("author","email") == "alsonotxmonader@gmail.com")
+    assert (d.hasSection("general") == True)
+    assert (d.hasSection("author") == True)
+    assert (d.hasProperty("author", "name") == True)
     d.deleteProperty("author", "name")
-    doAssert(d.hasProperty("author", "name") == False)
-    doAssert(d.getGlobalProperty("a") == "b")
-    doAssert(d.sectionsCount() == 2)
+    assert (d.hasProperty("author", "name") == False)
+    assert (d.getGlobalProperty("a") == "b")
+    assert (d.sectionsCount() == 2)
     print d.toIniString()
 
