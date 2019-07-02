@@ -18,8 +18,8 @@ class IniParserUnitTests(unittest.TestCase):
         self.assertTrue(self.p.is_empty(""))
         self.assertFalse(self.p.is_empty("a"))
     def test_parseKey(self):
-        self.assertEquals(self.p.parseKey("mo = salah"), ["mo", "salah"])
-        self.assertEquals(self.p.parseKey("asd = sda';dsak==a asd"), ["asd", "sda';dsak==a asd"])
+        self.assertEqual(self.p.parseKey("mo = salah"), ["mo", "salah"])
+        self.assertEqual(self.p.parseKey("asd = sda';dsak==a asd"), ["asd", "sda';dsak==a asd"])
     def test_addEntry(self):
         self.p.addEntry("sec1", "attr1", "val1")
         self.assertTrue(self.p.parseOutput.hasSection("sec1"))

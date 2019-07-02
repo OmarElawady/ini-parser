@@ -3,25 +3,39 @@ class ConfigData:
     def __init__(self):
         self.data = {}
     def setProperty(self, section, key, val):
+        section = section.lower()
+        key = key.lower()
+        val = val.lower()
         if not section in self.data:
             self.data[section] = {}
         self.data[section][key] = val
     def hasSection(self, section):
+        section = section.lower()
         return section in self.data
     def getProperty(self, section, key):
+        section = section.lower()
+        key = key.lower()
         return self.data[section][key]
     def sectionsCount(self):
         return len(list(filter(lambda x: type(x) == dict, self.data.values())))
     
     def hasProperty(self, section, key):
+        section = section.lower()
+        key = key.lower()
         return section in self.data and key in self.data[section]
     def getSection(self, section):
+        section = section.lower()
         return self.data[section]
     def deleteProperty(self, section, key):
+        section = section.lower()
+        key = key.lower()
         del self.data[section][key]
     def getGlobalProperty(self, key):
+        key = key.lower()
         return self.data[key]
     def setGlobalProperty(self, key, val):
+        key = key.lower()
+        val = val.lower()
         self.data[key] = val
     def toIniString(self):
         return str(self.data)
@@ -32,6 +46,7 @@ class Parser:
     def parse(self, string):
         currentSection = ""
         for line in string.split('\n'):
+            line = line.strip()
             if self.is_comment(line) or self.is_empty(line):
                 continue
             elif self.is_keyval(line):
@@ -46,7 +61,7 @@ class Parser:
         pos = line.find('=');
         return pos != -1 and line[0:pos].find('=') == -1 and line[0:pos].find(';') == -1
     def is_section(self, line):
-        return line[0] == '[' and line[-1] == ']' and line[1:-1].find(']') == -1
+        return len(line) > 2 and line[0] == '[' and line[-1] == ']' and line[1:-1].find(']') == -1
     def is_comment(self, line):
         return len(line) > 0 and (line[0] == ';' or line[0] == '#')
     def is_empty(self, line):

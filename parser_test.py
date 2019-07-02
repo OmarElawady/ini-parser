@@ -17,9 +17,8 @@ class IniParserTets(unittest.TestCase):
         self.assertEqual(result.getGlobalProperty("hey"), "hi")
         self.assertEqual(result.getGlobalProperty("th"), "th")
         self.assertEqual(result.getGlobalProperty("TH"), "th") # ini file is case insensitive
-        self.assertEqual(result.getGlobalProperty("asd"), None)
     def test_section(self):
-        sring = """
+        string = """
         [intern]
             company = codescalers
             period = 2 months
@@ -30,10 +29,10 @@ class IniParserTets(unittest.TestCase):
         """
         result = parser.parseIni(string)
         self.assertEqual(result.getProperty("intern", "company"), "codescalers")
-        self.assertEqual(result.getProerty("intern", "data"), "1/2/3")
+        self.assertEqual(result.getProperty("intern", "date"), "1/2/3")
         self.assertEqual(result.getProperty("python", "author"), "7mada")
     def test_special_char(self):
-        srting = """
+        string = """
         [section]
             attr1 = om=-12/xcz,pase2;
             attr2 = attr3 = attr4 = 0
@@ -66,7 +65,7 @@ class IniParserTets(unittest.TestCase):
         """
         result = parser.parseIni(string)
         self.assertEqual(result.getGlobalProperty("attr"), "0")
-        self.assertEqual(result.getProperty("section", "attr"), "1")
+        self.assertEqual(result.getProperty("section1", "attr"), "1")
         self.assertEqual(result.getProperty("section2", "attr"), "2")
     def test_comments(self):
         string = """
