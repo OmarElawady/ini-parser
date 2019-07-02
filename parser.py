@@ -1,4 +1,4 @@
-class Dictionary:
+class ConfigData:
 
     def __init__(self):
         self.data = {}
@@ -30,7 +30,7 @@ class Dictionary:
 
 class Parser:
     def __init__(self):
-        self.parseOutput = Dictionary()
+        self.parseOutput = ConfigData()
 
     def parse(self, string):
         currentSection = ""
