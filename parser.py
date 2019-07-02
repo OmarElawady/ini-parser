@@ -12,8 +12,9 @@ class Dictionary:
         return self.data[section][key]
     def sectionsCount(self):
         res = len(self.data.values())
-        if self.data.has_key(";"):
-            --res
+        #global section is not counted
+        if self.data.has_key(''):
+            res -= 1
         return res
     
     def hasProperty(self, section, key):
@@ -22,6 +23,8 @@ class Dictionary:
         return self.data[section]
     def deleteProperty(self, section, key):
         del self.data[section][key]
+    def getGlobalProperty(self, key):
+        return self.data[""][key]
     def toIniString(self):
         return str(self.data)
 
@@ -61,6 +64,7 @@ def doAssert(expr):
         raise Exception("Error")
 
 sample1 = """
+a = b
 [general]
 appname = configparser
 version = 0.1
@@ -87,6 +91,7 @@ doAssert(d.hasSection("author") == True)
 doAssert(d.hasProperty("author", "name") == True)
 d.deleteProperty("author", "name")
 doAssert(d.hasProperty("author", "name") == False)
-
+doAssert(d.getGlobalProperty("a") == "b")
+doAssert(d.sectionsCount() == 2)
 print d.toIniString()
 
