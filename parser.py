@@ -11,11 +11,7 @@ class ConfigData:
     def getProperty(self, section, key):
         return self.data[section][key]
     def sectionsCount(self):
-        res = len(self.data.values())
-        #global section is not counted
-        if '' in self.data:
-            res -= 1
-        return res
+        return len(list(filter(lambda x: type(x) == dict, self.data.values())))
     
     def hasProperty(self, section, key):
         return section in self.data and key in self.data[section]
@@ -24,7 +20,9 @@ class ConfigData:
     def deleteProperty(self, section, key):
         del self.data[section][key]
     def getGlobalProperty(self, key):
-        return self.data[""][key]
+        return self.data[key]
+    def setGlobalProperty(self, key, val):
+        self.data[key] = val
     def toIniString(self):
         return str(self.data)
 class Parser:
@@ -56,7 +54,12 @@ class Parser:
     def parseKey(self, line):
         return list(map(lambda l : l.strip(), line.split('=', 1)))
     def addEntry(self, section, key, val):
-        self.parseOutput.setProperty(section, key, val)
+        if section == "": # global property
+            self.parseOutput.setGlobalProperty(key, val)
+        else:
+            self.parseOutput.setProperty(section, key, val)
+
+            
 
 
 sample1 = """
