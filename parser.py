@@ -3,22 +3,22 @@ class ConfigData:
     def __init__(self):
         self.data = {}
     def setProperty(self, section, key, val):
-        if not self.data.has_key(section):
+        if not section in self.data:
             self.data[section] = {}
         self.data[section][key] = val
     def hasSection(self, section):
-        return self.data.has_key(section)
+        return section in self.data
     def getProperty(self, section, key):
         return self.data[section][key]
     def sectionsCount(self):
         res = len(self.data.values())
         #global section is not counted
-        if self.data.has_key(''):
+        if '' in self.data:
             res -= 1
         return res
     
     def hasProperty(self, section, key):
-        return self.data.has_key(section) and self.data[section].has_key(key)
+        return section in self.data and key in self.data[section]
     def getSection(self, section):
         return self.data[section]
     def deleteProperty(self, section, key):
@@ -27,7 +27,6 @@ class ConfigData:
         return self.data[""][key]
     def toIniString(self):
         return str(self.data)
-
 class Parser:
     def __init__(self):
         self.parseOutput = ConfigData()
@@ -55,7 +54,7 @@ class Parser:
     def is_empty(self, line):
         return len(line) == 0
     def parseKey(self, line):
-        return map(lambda l : l.strip(), line.split('=', 1))
+        return list(map(lambda l : l.strip(), line.split('=', 1)))
     def addEntry(self, section, key, val):
         self.parseOutput.setProperty(section, key, val)
 
@@ -90,5 +89,5 @@ if __name__ == "__main__":
     assert (d.hasProperty("author", "name") == False)
     assert (d.getGlobalProperty("a") == "b")
     assert (d.sectionsCount() == 2)
-    print d.toIniString()
+    print(d.toIniString())
 
