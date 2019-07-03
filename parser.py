@@ -92,20 +92,4 @@ def parseIni(string):
     return Parser().parse(string)
 if __name__ == "__main__":    
     d = parseIni(sample1)
-    # doAssert(d.sectionsCount() == 2)
-    assert (d.getProperty("general", "appname") == "configparser")
-    assert (d.getProperty("general","version") == "0.1")
-    assert (d.getProperty("author","name") == "xmonader")
-    assert (d.getProperty("author","email") == "notxmonader@gmail.com")
-
-    d.setProperty("author", "email", "alsonotxmonader@gmail.com")
-    assert (d.getProperty("author","email") == "alsonotxmonader@gmail.com")
-    assert (d.hasSection("general") == True)
-    assert (d.hasSection("author") == True)
-    assert (d.hasProperty("author", "name") == True)
-    d.deleteProperty("author", "name")
-    assert (d.hasProperty("author", "name") == False)
-    assert (d.getGlobalProperty("a") == "b")
-    assert (d.sectionsCount() == 2)
     print(d.toIniString())
-
