@@ -1,2 +1,4 @@
 language: python
 script: python parser_test.py
+script: pytest test_config_data.py
+script: python parser_unit_test.py
