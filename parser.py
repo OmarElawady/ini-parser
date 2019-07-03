@@ -52,7 +52,7 @@ class ConfigData:
         key = key.lower()
         return self.data[section][key]
 
-    def sections_count(self):
+    def __len__(self):
         """Finds the number of section currently stored.
 
         Returns:
@@ -138,7 +138,7 @@ class ConfigData:
         val = val.lower()
         self.data[key] = val
 
-    def to_ini_string(self):
+    def __str__(self):
         """Extracts a printable representation of the config data.
 
         Returns:
@@ -288,4 +288,4 @@ if __name__ == "__main__":
 
     """
     d = parse_ini(sample1)
-    print(d.to_ini_string())
+    print(d)

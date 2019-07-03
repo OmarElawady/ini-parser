@@ -46,10 +46,10 @@ def test_sget_global_property(create_config):
         "a") == "c", "Didn't add the global attribute 'a'"
 
 
-def test_sections_count(create_config):
+def test_len(create_config):
     c = create_config
-    assert c.sections_count() == 2, "sections count is 2 not {}".format(
-            c.sections_count())
+    assert len(c) == 2, "sections count is 2 not {}".format(
+            len(c))
 
 
 def test_has_section(create_config):
