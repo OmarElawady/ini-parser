@@ -1,2 +1,2 @@
 language: python
-script: pyhton parser_test.py
+script: python parser_test.py
