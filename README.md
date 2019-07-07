@@ -1,4 +1,5 @@
 [![codecov](https://codecov.io/gh/OmarElawady/ini-parser/branch/master/graph/badge.svg)](https://codecov.io/gh/OmarElawady/ini-parser)
+[![Build Status](https://travis-ci.com/OmarElawady/ini-parser.svg?branch=master)](https://travis-ci.com/OmarElawady/ini-parser)
 
 INI parser
 ==========
